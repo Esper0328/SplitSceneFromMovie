@@ -7,7 +7,8 @@ The purpose of this script is effective edit of movie files (especially for my u
 * ffmpeg
 
 ## Usage
-python splitSceneFromMovie.py MovieFilename.mp4, then you can get split movie file based on scene change under ./movie folder. 
+python splitSceneFromMovie.py MovieFilename.mp4, then you can get split movie file based on scene change under ./movie folder.
+Currently only mp4 file is applicable.
 You can regorganize a movie file by executing "ffmpeg -f concat -i sceneList.txt -c copy output.mp4" after editing sceneList.txt.
 ffmpeg is available by executing　"brew install ffmpeg”
 
