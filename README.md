@@ -2,9 +2,9 @@
 The purpose of this script is effective edit of movie files (especially for my underwater movies).
 
 ## Environment
-Python 3.8.1
-macOS Catalina 10.15.7
-ffmpeg
+* Python 3.8.1
+* macOS Catalina 10.15.7
+* ffmpeg
 
 ## Usage
 python splitSceneFromMovie.py MovieFilename.mp4, then you can get split movie file based on scene change under ./movie folder. 
