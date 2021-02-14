@@ -57,7 +57,7 @@ def writeFile(fileName, text):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print('Invalid Number of argument¥nUsage: python cutSceneFromMovie.py Filename')
+        print('Invalid Number of argument¥nUsage: python splitSceneFromMovie.py Filename')
     else:
         if not os.path.exists('image'):
             subprocess.call(["mkdir", "image"])
