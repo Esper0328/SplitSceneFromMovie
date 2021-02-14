@@ -17,14 +17,16 @@ def getMovieEndTime(data):
     time = (int(hours) * 60 + int(minutes)) * 60 + int(seconds)
     return time
 
-def getSceneChangeTime(data):
+def getSceneTime(data):
     pattern = r'pts_time:([0-9]+\.[0-9]+)'
-    timeList = re.findall(pattern, data)
-    timeList = [float(n) for n in timeList]
-    return timeList
+    sceneTime = re.findall(pattern, data)
+    sceneTime = [float(n) for n in sceneTime]
+    sceneTime.insert(0, 0)#Added movieStartTime
+    movieEndTime = getMovieEndTime(data)
+    sceneTime.append(movieEndTime)
+    return sceneTime
 
 def getSceneChange(path):
-    print(path)
     fileList = os.listdir(path)
     fileList = sorted(fileList)
     return fileList
@@ -66,18 +68,14 @@ if __name__ == '__main__':
             cmd = 'ffmpeg -i ' + sys.argv[1] + ' -vf '+ \
             '\"select=gt(scene\,0.3), scale=640:360,showinfo\" ' + '-vsync vfr image/%04d.jpg -f null - 2>ffmpegOutput'
             subprocess.call(cmd, shell=True)
-            
-        data = loadData('ffmpegOutput')
-        sceneTime = getSceneChangeTime(data)
-        sceneTime.insert(0, 0)#Added movieStartTime
-        movieEndTime = getMovieEndTime(data)
-        sceneTime.append(movieEndTime)
 
         sceneChangeFile = getSceneChange("./image")
         sceneIndex = getSceneIndex(sceneChangeFile)
         if not os.path.exists('./movie/output0.mp4'):
             if not os.path.exists('movie'):
                 subprocess.call(["mkdir", "movie"])
+            data = loadData('ffmpegOutput')
+            sceneTime = getSceneTime(data)
             text = splitSceneFromMovie(sceneIndex, sceneTime)
         else:
             text = ''
