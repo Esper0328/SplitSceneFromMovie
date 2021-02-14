@@ -81,7 +81,7 @@ if __name__ == '__main__':
             text = splitSceneFromMovie(sceneIndex, sceneTime)
         else:
             text = ''
-            for i, j in enumerate(sceneChangeIndex):
+            for i, j in enumerate(sceneIndex):
                 text += 'file output/output' + str(i) + '.mp4\n'
         writeFile('sceneList.txt', text)
         subprocess.call(["cat", "sceneList.txt"])    
